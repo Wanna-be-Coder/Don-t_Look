@@ -1,0 +1,95 @@
+Thu Feb 2 12:44:06 2017   Router0   Router>en
+Thu Feb 2 12:44:08 2017   Router0   Router#conf t
+Thu Feb 2 12:45:14 2017   Router0   Router(config)#ipv6 unicast-routing 
+Thu Feb 2 12:45:36 2017   Router0   Router(config)#int f0/0
+Thu Feb 2 12:45:51 2017   Router0   Router(config-if)#ipv6 address 2001:201:A::1/64
+Thu Feb 2 12:45:53 2017   Router0   Router(config-if)#no shutdown 
+Thu Feb 2 12:46:22 2017   Router1   Router>en
+Thu Feb 2 12:46:23 2017   Router1   Router#conf t
+Thu Feb 2 12:46:29 2017   Router1   Router(config)#int f0/0
+Thu Feb 2 12:46:41 2017   Router1   Router(config-if)#ipv6 address 2001:201:1::1/64
+Thu Feb 2 12:46:43 2017   Router1   Router(config-if)#no shutdown 
+Thu Feb 2 12:47:31 2017   Router0   Router(config-if)#int s0/0/0
+Thu Feb 2 12:47:47 2017   Router0   Router(config-if)#ipv6 address 2001:201:B::1/64
+Thu Feb 2 12:47:49 2017   Router0   Router(config-if)#no shutdown 
+Thu Feb 2 12:47:53 2017   Router0   Router(config-if)#clock rate 64000
+Thu Feb 2 12:47:55 2017   Router0   Router(config-if)#exit
+Thu Feb 2 12:48:03 2017   Router1   Router(config-if)#int s0/0/0
+Thu Feb 2 12:48:22 2017   Router1   Router(config-if)#ipv6 add 2001:201:B::2/64
+Thu Feb 2 12:48:24 2017   Router1   Router(config-if)#no shutdown 
+Thu Feb 2 12:49:07 2017   Router0   Router(config)#exit
+Thu Feb 2 12:49:12 2017   Router0   Router#show ipv6 route
+Thu Feb 2 12:50:57 2017   Router0   Router#conf t
+Thu Feb 2 12:51:02 2017   Router0   Router(config)#ipv6 unicast-routing 
+Thu Feb 2 12:52:01 2017   Router0   Router(config)#ipv6 router rip 1
+Thu Feb 2 12:52:56 2017   Router0   Router(config-rtr)#exit
+Thu Feb 2 12:53:00 2017   Router0   Router(config)#int f0/0
+Thu Feb 2 12:53:51 2017   Router0   Router(config-if)#ipv6 rip 1 enable 
+Thu Feb 2 12:53:57 2017   Router0   Router(config-if)#exit
+Thu Feb 2 12:54:02 2017   Router0   Router(config)#int s0/0/0
+Thu Feb 2 12:54:17 2017   Router0   Router(config-if)#ipv6 rip 1 enable 
+Thu Feb 2 12:54:31 2017   Router0   Router(config-if)#exit
+Thu Feb 2 12:54:38 2017   Router1   Router(config-if)#end
+Thu Feb 2 12:54:42 2017   Router1   Router#show ip rou
+Thu Feb 2 12:54:46 2017   Router1   Router#show ipv6 rou
+Thu Feb 2 12:54:57 2017   Router1   Router#conf t
+Thu Feb 2 12:55:04 2017   Router1   Router(config)#ipv6 unicast-routing 
+Thu Feb 2 12:55:28 2017   Router1   Router(config)#ipv6 router rip 1
+Thu Feb 2 12:55:30 2017   Router1   Router(config-rtr)#exit
+Thu Feb 2 12:55:33 2017   Router1   Router(config)#int f0/0
+Thu Feb 2 12:55:39 2017   Router1   Router(config-if)#ipv6 rip 1 enable 
+Thu Feb 2 12:55:41 2017   Router1   Router(config-if)#exit
+Thu Feb 2 12:55:46 2017   Router1   Router(config)#int s0/0/0
+Thu Feb 2 12:55:49 2017   Router1   Router(config-if)#ipv6 rip 1 enable 
+Thu Feb 2 12:55:50 2017   Router1   Router(config-if)#exit
+Thu Feb 2 12:56:19 2017   Router1   Router(config)#exit
+Thu Feb 2 12:56:26 2017   Router1   Router#show ipv6 rou
+Thu Feb 2 13:19:52 2017   CopyRouter0   Router>en
+Thu Feb 2 13:19:53 2017   CopyRouter0   Router#conf t
+Thu Feb 2 13:20:04 2017   CopyRouter0   Router(config)#int f0/0
+Thu Feb 2 13:20:50 2017   CopyRouter0   Router(config-if)#ipv6 add 2001:201:A::1/64
+Thu Feb 2 13:21:43 2017   CopyRouter0   Router(config-if)#exit
+Thu Feb 2 13:21:47 2017   CopyRouter0   Router(config)#ipv6 unicast-routing 
+Thu Feb 2 13:21:54 2017   CopyRouter0   Router(config)#int f0/0
+Thu Feb 2 13:21:56 2017   CopyRouter0   Router(config-if)#no shutdown 
+Thu Feb 2 13:28:09 2017   Router2   Router>en
+Thu Feb 2 13:28:10 2017   Router2   Router#conf t
+Thu Feb 2 13:28:54 2017   Router2   Router(config)#ip dhcp pool CS
+Thu Feb 2 13:29:20 2017   Router2   Router(dhcp-config)#?
+Thu Feb 2 13:29:55 2017   Router2   Router(dhcp-config)#net 192.168.0.0 255.255.255.0
+Thu Feb 2 13:30:09 2017   Router2   Router(dhcp-config)#default-router 192.168.0.1
+Thu Feb 2 13:32:58 2017   Router2   Router(dhcp-config)#exit
+Thu Feb 2 13:33:30 2017   Router2   Router(config)#int f0/0
+Thu Feb 2 13:33:38 2017   Router2   Router(config-if)#ip add 192.168.0.1 255.255.255.0
+Thu Feb 2 13:33:40 2017   Router2   Router(config-if)#no shutdown 
+Thu Feb 2 13:33:42 2017   Router2   Router(config-if)#exit
+Thu Feb 2 13:36:37 2017   CopyRouter2   Router>en
+Thu Feb 2 13:36:39 2017   CopyRouter2   Router#conf t
+Thu Feb 2 13:37:07 2017   CopyRouter2   Router(config)#ipv6 dhcp ?
+Thu Feb 2 13:37:10 2017   CopyRouter2   Router(config)#ipv6 dhcp pool ?
+Thu Feb 2 13:37:13 2017   CopyRouter2   Router(config)#ipv6 dhcp pool CS ?
+Thu Feb 2 13:37:14 2017   CopyRouter2   Router(config)#ipv6 dhcp pool CS 
+Thu Feb 2 13:37:38 2017   CopyRouter2   Router(config-dhcpv6)#?
+Thu Feb 2 13:38:07 2017   CopyRouter2   Router(config-dhcpv6)#prefix-delegation ?
+Thu Feb 2 13:38:56 2017   CopyRouter2   Router(config-dhcpv6)#prefix-delegation pool ACC ?
+Thu Feb 2 13:38:57 2017   CopyRouter2   Router(config-dhcpv6)#prefix-delegation pool ACC 
+Thu Feb 2 13:39:17 2017   CopyRouter2   Router(config-dhcpv6)#exit
+Thu Feb 2 13:39:31 2017   CopyRouter2   Router(config)#int f0/0
+Thu Feb 2 13:39:51 2017   CopyRouter2   Router(config-if)#ipv6 address 2001:201:A::/64
+Thu Feb 2 13:40:08 2017   CopyRouter2   Router(config-if)#ipv6 dhcp ?
+Thu Feb 2 13:42:18 2017   CopyRouter2   Router(config-if)#ipv6 dhcp server CS
+Thu Feb 2 13:42:26 2017   CopyRouter2   Router(config-if)#exit
+Thu Feb 2 13:42:34 2017   CopyRouter2   Router(config)#ipv6 dhcp ?
+Thu Feb 2 13:42:39 2017   CopyRouter2   Router(config)#ipv6 ?
+Thu Feb 2 13:42:43 2017   CopyRouter2   Router(config)#ipv6 local ?
+Thu Feb 2 13:42:46 2017   CopyRouter2   Router(config)#ipv6 local pool ?
+Thu Feb 2 13:42:50 2017   CopyRouter2   Router(config)#ipv6 local pool ACC ?
+Thu Feb 2 13:43:02 2017   CopyRouter2   Router(config)#ipv6 local pool ACC 2001:201:A::/64
+Thu Feb 2 13:43:06 2017   CopyRouter2   Router(config)#ipv6 local pool ACC 2001:201:A::/64 ?
+Thu Feb 2 13:43:16 2017   CopyRouter2   Router(config)#ipv6 local pool ACC 2001:201:A::/64 64
+Thu Feb 2 13:43:31 2017   CopyRouter2   Router(config)#exit
+Thu Feb 2 13:43:40 2017   CopyRouter2   Router#conf t
+Thu Feb 2 13:43:42 2017   CopyRouter2   Router(config)#int f0/0
+Thu Feb 2 13:43:44 2017   CopyRouter2   Router(config-if)#no shutdown 
+Thu Feb 2 13:43:47 2017   CopyRouter2   Router(config-if)#exit
+Thu Feb 2 13:43:51 2017   CopyRouter2   Router(config)#ipv6 unicast-routing 

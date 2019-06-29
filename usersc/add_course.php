@@ -88,10 +88,14 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="Course Duration">Course Duration in Weeks:</label>
-                        <input type="number" class="form-control" name="cduration" required>
+                        <input id="C_week" type="number" class="form-control" name="cduration"  min="1" required>
                     </div>
+
+                    <div id="input_fields">
+
                     <label for="Course Content upload">Upload Core content :</label>
                     <input type="file" class="form-control" name="fileToUpload" required>
+                    </div>
                     <br>
                     <br>
                     <input type="hidden" name="csrf" value="<?= Token::generate() ?>">
@@ -108,6 +112,7 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 </div>
+
 
 
 <?php require_once $abs_us_root . $us_url_root . 'usersc/templates/' . $settings->template . '/container_close.php'; ?>

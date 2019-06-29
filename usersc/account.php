@@ -98,6 +98,51 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 	</div>
 </div>
 </div>
+
+
+
+<div>
+	<?php $db->query("SELECT * FROM `blog`");
+		foreach ($db->results() as $record){
+		?>
+		<div>
+		<h3>	<?= $record->title;?> </h3>
+		<h4><?= $record->timestamp; ?></h4>
+		<p><?= $record->content; ?></p>
+		</div>
+	
+	<?php	
+	}
+	?>
+</div>
+<div class="double_column">
+	<div class="left">
+
+		<div class="left1">Courses Available
+		<?php 
+	$db->query("SELECT * FROM `courses`");
+	foreach ($db->results() as $record){
+		
+
+	?>
+		<div class="left2"><?= $record->name; ?></div><?php }?></div><br>
+		<div class="left1">My class<div class="left2">data</div></div><br>
+		<div class="left1">My class<div class="left2">data</div></div><br>
+    </div>
+	<div class="right">
+	    <div class="left1">My class<div class="left2">data</div></div><br>
+		<div class="left1">My class<div class="left2">data</div></div><br>
+		<div class="left1">My class<div class="left2">data</div></div><br>
+	</div>
+
+	
+
+</div>
+
+
+
+
+
 <div>
 	<?php 
 	$id=$user->data()->id;
@@ -124,43 +169,8 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 </div>
 
 
-<div>
-	<?php $db->query("SELECT * FROM `blog`");
-		foreach ($db->results() as $record){
-		?>
-		<div>
-		<h3>	<?= $record->title;?> </h3>
-		<h4><?= $record->timestamp; ?></h4>
-		<p><?= $record->content; ?></p>
-		</div>
-	
-	<?php	
-	}
-	?>
-</div>
-<div class="double_column">
-	<div class="left">
 
-		<div class="left1">Courses Available
-		<?php 
-	$db->query("SELECT * FROM `courseinfo`");
-	foreach ($db->results() as $record){
-		
 
-	?>
-		<div class="left2"><?= $record->title; ?></div><?php }?></div><br>
-		<div class="left1">My class<div class="left2">data</div></div><br>
-		<div class="left1">My class<div class="left2">data</div></div><br>
-    </div>
-	<div class="right">
-	    <div class="left1">My class<div class="left2">data</div></div><br>
-		<div class="left1">My class<div class="left2">data</div></div><br>
-		<div class="left1">My class<div class="left2">data</div></div><br>
-	</div>
-
-	
-
-</div>
 <br>
 <button type="button" class="btn btn-primary">SYSTEM Admin</button><br><br>
 <button type="button" class="btn btn-primary">Find Members</button>
