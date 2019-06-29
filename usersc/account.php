@@ -115,6 +115,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 	
 <a href="blog.php" class="btn btn-info btn-block">Write Blogs</a>
 <a href="news.php" class="btn btn-info btn-block">Update News</a>
+<a href="cclass.php" class="btn btn-info btn-block">Make Class</a>
 <a href="add_course.php" class="btn btn-info btn-block">Add Courses</a>
 	<?php	
 	}
@@ -142,12 +143,12 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
 		<div class="left1">Courses Available
 		<?php 
-	$db->query("SELECT * FROM `course`");
+	$db->query("SELECT * FROM `courseinfo`");
 	foreach ($db->results() as $record){
 		
 
 	?>
-		<div class="left2"><?= $record->coursename; ?></div><?php }?></div><br>
+		<div class="left2"><?= $record->title; ?></div><?php }?></div><br>
 		<div class="left1">My class<div class="left2">data</div></div><br>
 		<div class="left1">My class<div class="left2">data</div></div><br>
     </div>

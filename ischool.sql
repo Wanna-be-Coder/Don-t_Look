@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2019 at 11:23 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Apr 03, 2019 at 07:36 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -150,34 +150,80 @@ INSERT INTO `blog_form` (`id`, `ord`, `col`, `form_descrip`, `table_descrip`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course`
+-- Table structure for table `class`
 --
 
-CREATE TABLE `course` (
+CREATE TABLE `class` (
   `id` int(11) NOT NULL,
-  `coursename` varchar(255) DEFAULT NULL,
-  `coursetype` varchar(255) DEFAULT NULL,
-  `subcourse` varchar(255) DEFAULT NULL,
-  `requiredcourse` varchar(255) DEFAULT NULL,
-  `seatcount` int(11) DEFAULT NULL
+  `course_id` int(11) NOT NULL,
+  `tutor_id` int(11) NOT NULL,
+  `days` varchar(100) NOT NULL,
+  `seats` varchar(100) NOT NULL,
+  `sdate` date NOT NULL,
+  `edate` date NOT NULL,
+  `stime` time NOT NULL,
+  `etime` time NOT NULL,
+  `uploads` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `course`
+-- Dumping data for table `class`
 --
 
-INSERT INTO `course` (`id`, `coursename`, `coursetype`, `subcourse`, `requiredcourse`, `seatcount`) VALUES
-(1, 'Mathematics for kids', 'Elementary Education', 'none', 'none', 100),
-(2, 'English rapid reader', 'Elementary Education', 'none', 'none', 100),
-(3, 'Micro Economics', 'Higher Education', 'Macro Economics', 'Principls of Economics', 200);
+INSERT INTO `class` (`id`, `course_id`, `tutor_id`, `days`, `seats`, `sdate`, `edate`, `stime`, `etime`, `uploads`) VALUES
+(1, 1, 1, 'sunday,monday,tuesday,wednesday,', '22', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(2, 1, 12, 'sunday,monday,friday,saturday,', '30', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(3, 1, 12, '', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(4, 1, 1, 'sunday,tuesday,', '12121', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(5, 1, 12, '', '213123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(6, 1, 1, 'tuesday,wednesday,', '123123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(7, 1, 12, 'wednesday,', '12', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(8, 1, 2, 'monday,thursday,', '1', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(12, 5, 1, 'sunday,', '1', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(14, 0, 0, 'c', 'd', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(15, 5, 1, 'thursday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(16, 5, 1, 'thursday,friday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(17, 5, 1, 'thursday,friday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(18, 5, 1, 'friday,', '12312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(19, 5, 1, 'saturday,', '2312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(20, 5, 1, 'saturday,', '2312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(21, 5, 1, 'tuesday,thursday,', '1234', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(22, 5, 1, 'monday,wednesday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(23, 5, 1, 'wednesday,', '11', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(24, 5, 1, 'wednesday,', '13', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(25, 5, 1, 'wednesday,', '13', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(26, 5, 1, 'sunday,tuesday,', '11', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_form`
+-- Table structure for table `courseinfo`
 --
 
-CREATE TABLE `course_form` (
+CREATE TABLE `courseinfo` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type` varchar(255) DEFAULT NULL,
+  `Complementaryknowledge` varchar(255) DEFAULT NULL,
+  `sdate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `courseinfo`
+--
+
+INSERT INTO `courseinfo` (`id`, `title`, `content`, `timestamp`, `type`, `Complementaryknowledge`, `sdate`) VALUES
+(1, 'Basic Mathematics', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2019-02-11 15:00:30', 'Science &amp; Technology', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courseinfo_form`
+--
+
+CREATE TABLE `courseinfo_form` (
   `id` int(11) NOT NULL,
   `ord` int(11) NOT NULL,
   `col` varchar(255) NOT NULL,
@@ -195,15 +241,54 @@ CREATE TABLE `course_form` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `course_form`
+-- Dumping data for table `courseinfo_form`
 --
 
-INSERT INTO `course_form` (`id`, `ord`, `col`, `form_descrip`, `table_descrip`, `col_type`, `field_type`, `length`, `required`, `validation`, `label_class`, `field_class`, `input_html`, `select_opts`) VALUES
-(1, 10, 'coursename', 'Course name', 'course_name', 'varchar', 'text', 0, 1, '', '', 'form-control', '', '{\"\":\"\"}'),
-(2, 20, 'coursetype', 'Course Type', 'course_type', 'varchar', 'dropdown', 0, 1, '', '', 'form-control', '', '{\"Elementary Education\":\"Primary Education\",\"Higher Education\":\"Business Education\",\"Science &amp; Technology\":\"Engineering Education\"}'),
-(3, 30, 'subcourse', 'Sub Courses', 'subcourse', 'varchar', 'text', 0, 0, '', '', 'form-control', '', 'null'),
-(4, 40, 'requiredcourse', 'Required Course', 'required_course', 'varchar', 'text', 0, 0, '', '', 'form-control', '', 'null'),
-(5, 50, 'seatcount', 'Available Seats', 'seat_count', 'int', 'number', 0, 1, '', '', 'form-control', '', '{\"\":\"\"}');
+INSERT INTO `courseinfo_form` (`id`, `ord`, `col`, `form_descrip`, `table_descrip`, `col_type`, `field_type`, `length`, `required`, `validation`, `label_class`, `field_class`, `input_html`, `select_opts`) VALUES
+(1, 10, 'title', 'Title', 'title', 'varchar', 'text', 0, 1, '', '', 'form-control', '', '{\"\":\"\"}'),
+(2, 20, 'content', 'content', 'Content', 'text', 'textarea', 0, 1, '', '', 'form-control', '', 'null'),
+(3, 30, 'timestamp', 'created', 'created', 'timestamp', 'timestamp', 0, 1, '', '', 'form-control', '', 'null'),
+(4, 11, 'type', 'Type', 'type', 'varchar', 'dropdown', 0, 1, '', '', 'form-control', '', '{\"Science &amp; Technology\":\"Science &amp; Technology\",\"Business Studies\":\"Business Studies\",\"Literature\":\"Literature\",\"Others\":\"Others\"}'),
+(5, 40, 'Complementaryknowledge', 'Complementary Knowledge', 'complementary', 'varchar', 'text', 0, 0, '', '', 'form-control', '', 'null'),
+(6, 50, 'sdate', 'date', 'Starting Date', 'date', 'date', 0, 0, '', '', 'form-control', '', '{\"\":\"\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `description` varchar(30) NOT NULL,
+  `duration` varchar(30) NOT NULL,
+  `document` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `type`, `description`, `duration`, `document`) VALUES
+(5, 'ABC', 'Science &amp; Technology', 'Lorem IpsumLorem IpsumLorem Ip', '11', 'uploads/Cloth D.pptx'),
+(6, 'Test', 'Literature', 'sadasdasdasdasdasdasd', '4', 'uploads/Untitled-1.png'),
+(7, 'Test2', 'Literature', 'sadasdasdasdasdasdasd', '4', 'uploads/Untitled-1.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_info`
+--
+
+CREATE TABLE `course_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `complementary` varchar(100) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -271,7 +356,7 @@ CREATE TABLE `email` (
 --
 
 INSERT INTO `email` (`id`, `website_name`, `smtp_server`, `smtp_port`, `email_login`, `email_pass`, `from_name`, `from_email`, `transport`, `verify_url`, `email_act`, `debug_level`, `isSMTP`, `isHTML`, `useSMTPauth`) VALUES
-(1, 'User Spice', 'smtp.gmail.com', 587, 'saminsharar2@gmail.com', 'Samsha123456!', 'i-School', 'saminsharar2@gmail.com', 'tls', 'http://localhost/sss/', 0, 0, 1, 'true', 'true');
+(1, 'User Spice', 'smtp.gmail.com', 587, 'saminsharar2@gmail.com', 'Samsha123456!', 'i-School', 'saminsharar2@gmail.com', 'tls', 'http://localhost:8080/i-school(master)/', 1, 0, 1, 'true', 'true');
 
 -- --------------------------------------------------------
 
@@ -460,7 +545,40 @@ INSERT INTO `logs` (`id`, `user_id`, `logdate`, `logtype`, `lognote`, `ip`) VALU
 (97, 1, '2019-02-06 09:40:56', 'Pages Manager', 'Retitled \'usersc/add_course.php\' to \'Add Course\'.', '::1'),
 (98, 14, '2019-02-06 10:12:21', 'User', 'User logged in.', NULL),
 (99, 1, '2019-02-06 10:19:53', 'User', 'User logged in.', NULL),
-(100, 1, '2019-02-06 10:21:10', 'User', 'User logged in.', NULL);
+(100, 1, '2019-02-06 10:21:10', 'User', 'User logged in.', NULL),
+(101, 1, '2019-02-06 20:07:12', 'User', 'User logged in.', NULL),
+(102, 1, '2019-02-09 09:37:57', 'User', 'User logged in.', NULL),
+(103, 1, '2019-02-09 09:38:08', 'Email Settings', 'Updated email_act from 0 to 1.', '::1'),
+(104, 15, '2019-02-09 09:39:35', 'User', 'Registration completed and verification email sent.', '::1'),
+(105, 15, '2019-02-09 09:40:46', 'User', 'User logged in.', NULL),
+(106, 15, '2019-02-09 09:40:59', 'User', 'Requested a new verification email.', '::1'),
+(107, 1, '2019-02-09 09:43:22', 'User', 'User logged in.', NULL),
+(108, 1, '2019-02-09 09:43:47', 'Email Settings', 'Updated verify_url from http://localhost/sss/ to http://localhost/i-school(master).', '::1'),
+(109, 1, '2019-02-09 09:50:16', 'User', 'User logged in.', NULL),
+(110, 1, '2019-02-09 09:50:38', 'Email Settings', 'Updated verify_url from http://localhost/i-school(master) to http://localhost:8080/i-school(master)/.', '::1'),
+(111, 15, '2019-02-09 09:51:05', 'User', 'User logged in.', NULL),
+(112, 15, '2019-02-09 09:51:15', 'User', 'Requested a new verification email.', '::1'),
+(113, 15, '2019-02-09 09:51:29', 'User', 'Verification completed via vericode.', '::1'),
+(114, 15, '2019-02-09 09:51:37', 'User', 'User logged in.', NULL),
+(115, 1, '2019-02-11 14:01:41', 'User', 'User logged in.', NULL),
+(116, 1, '2019-02-11 14:03:03', 'Pages Manager', 'Added 2 permission(s) to usersc/ccourse.php.', '::1'),
+(117, 1, '2019-02-11 14:03:03', 'Pages Manager', 'Retitled \'usersc/ccourse.php\' to \'Courses\'.', '::1'),
+(118, 1, '2019-02-11 14:03:36', 'Pages Manager', 'Added 3 permission(s) to usersc/cclass.php.', '::1'),
+(119, 1, '2019-02-11 14:03:36', 'Pages Manager', 'Retitled \'usersc/cclass.php\' to \'Add Class\'.', '::1'),
+(120, 1, '2019-02-11 14:04:31', 'Pages Manager', 'Retitled \'usersc/ccourse.php\' to \'Add Courses\'.', '::1'),
+(121, 1, '2019-02-11 14:04:36', 'Pages Manager', 'Retitled \'usersc/ccourse.php\' to \'Add Course\'.', '::1'),
+(122, 1, '2019-02-12 16:15:47', 'User', 'User logged in.', NULL),
+(123, 1, '2019-02-12 19:22:58', 'User', 'User logged in.', NULL),
+(124, 1, '2019-02-25 14:15:16', 'User', 'User logged in.', NULL),
+(125, 1, '2019-02-25 14:51:09', 'User', 'User logged in.', NULL),
+(126, 1, '2019-03-27 15:55:03', 'User', 'User logged in.', NULL),
+(127, 1, '2019-04-02 16:31:52', 'User', 'User logged in.', NULL),
+(128, 1, '2019-04-02 17:07:12', 'Pages Manager', 'Added 2 permission(s) to usersc/add_coursep.php.', '::1'),
+(129, 1, '2019-04-02 17:07:12', 'Pages Manager', 'Retitled \'usersc/add_coursep.php\' to \'process_course\'.', '::1'),
+(130, 1, '2019-04-02 20:35:13', 'Pages Manager', 'Added 2 permission(s) to usersc/cclass2.php.', '::1'),
+(131, 1, '2019-04-02 20:35:14', 'Pages Manager', 'Retitled \'usersc/cclass2.php\' to \'Add Class\'.', '::1'),
+(132, 16, '2019-04-02 20:59:21', 'User', 'Registration completed and verification email sent.', '::1'),
+(133, 1, '2019-04-02 21:01:07', 'User', 'User logged in.', NULL);
 
 -- --------------------------------------------------------
 
@@ -696,7 +814,10 @@ INSERT INTO `pages` (`id`, `page`, `title`, `private`, `re_auth`) VALUES
 (96, 'usersc/account.php', '', 0, 0),
 (97, 'usersc/blog.php', 'Blog', 1, 0),
 (98, 'usersc/news.php', 'News Update', 1, 0),
-(99, 'usersc/add_course.php', 'Add Course', 1, 0);
+(99, 'usersc/add_course.php', 'Add Course', 1, 0),
+(101, 'usersc/cclass.php', 'Add Class', 1, 0),
+(102, 'usersc/add_coursep.php', 'process_course', 1, 0),
+(103, 'usersc/cclass2.php', 'Add Class', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -796,7 +917,16 @@ INSERT INTO `permission_page_matches` (`id`, `permission_id`, `page_id`) VALUES
 (63, 6, 98),
 (64, 2, 99),
 (65, 5, 99),
-(66, 6, 99);
+(66, 6, 99),
+(67, 2, 100),
+(68, 6, 100),
+(69, 2, 101),
+(70, 5, 101),
+(71, 6, 101),
+(72, 2, 102),
+(73, 6, 102),
+(74, 2, 103),
+(75, 6, 103);
 
 -- --------------------------------------------------------
 
@@ -897,7 +1027,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `recaptcha`, `force_ssl`, `css_sample`, `us_css1`, `us_css2`, `us_css3`, `site_name`, `language`, `track_guest`, `site_offline`, `force_pr`, `glogin`, `fblogin`, `gid`, `gsecret`, `gredirect`, `ghome`, `fbid`, `fbsecret`, `fbcallback`, `graph_ver`, `finalredir`, `req_cap`, `req_num`, `min_pw`, `max_pw`, `min_un`, `max_un`, `messaging`, `snooping`, `echouser`, `wys`, `change_un`, `backup_dest`, `backup_source`, `backup_table`, `msg_notification`, `permission_restriction`, `auto_assign_un`, `page_permission_restriction`, `msg_blocked_users`, `msg_default_to`, `notifications`, `notif_daylimit`, `recap_public`, `recap_private`, `page_default_private`, `navigation_type`, `copyright`, `custom_settings`, `system_announcement`, `twofa`, `force_notif`, `cron_ip`, `registration`, `join_vericode_expiry`, `reset_vericode_expiry`, `admin_verify`, `admin_verify_timeout`, `session_manager`, `template`, `saas`, `redirect_uri_after_login`, `show_tos`) VALUES
-(1, 0, 0, 0, '../users/css/color_schemes/bootstrap.min.css', '../users/css/sb-admin.css', '../users/css/custom.css', 'i-School', 'en', 1, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', 0, 0, 6, 30, 4, 30, 1, 1, 0, 1, 0, '/', 'everything', '', 0, 0, 0, 0, 0, 1, 0, 7, '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe', 1, 1, 'i-School', 1, '', 0, 0, 'off', 1, 24, 15, 1, 120, 0, 'default', NULL, NULL, 1);
+(1, 0, 0, 0, '../users/css/color_schemes/bootstrap.min.css', '../users/css/sb-admin.css', '../users/css/custom.css', 'i-School', 'en', 1, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', 0, 0, 6, 30, 4, 30, 1, 1, 0, 1, 0, '/', 'everything', '', 0, 0, 0, 0, 0, 1, 0, 7, 'password', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe', 1, 1, 'i-School', 1, '', 0, 0, 'off', 1, 24, 15, 1, 120, 0, 'default', NULL, 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -996,10 +1126,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `email_new`, `username`, `password`, `pin`, `fname`, `lname`, `permissions`, `logins`, `account_owner`, `account_id`, `company`, `join_date`, `last_login`, `email_verified`, `vericode`, `vericode_expiry`, `active`, `oauth_provider`, `oauth_uid`, `gender`, `locale`, `gpluslink`, `picture`, `created`, `modified`, `fb_uid`, `un_changed`, `msg_exempt`, `last_confirm`, `protected`, `dev_user`, `msg_notification`, `force_pr`, `twoKey`, `twoEnabled`, `twoDate`, `cloak_allowed`, `org`, `account_mgr`, `oauth_tos_accepted`, `user_type`) VALUES
-(1, 'userspicephp@gmail.com', NULL, 'admin', '$2y$12$1v06jm2KMOXuuo3qP7erTuTIJFOnzhpds1Moa8BadnUUeX0RV3ex.', NULL, 'The', 'Admin', 1, 30, 1, 0, 'UserSpice', '2016-01-01 00:00:00', '2019-02-06 16:21:10', 1, 'nlPsJDtyeqFWsS', '2019-02-06 10:21:10', 0, '', '', '', '', '', '', '0000-00-00 00:00:00', '1899-11-30 00:00:00', '', 0, 1, '2017-10-08 15:24:37', 1, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
+(1, 'userspicephp@gmail.com', NULL, 'admin', '$2y$12$1v06jm2KMOXuuo3qP7erTuTIJFOnzhpds1Moa8BadnUUeX0RV3ex.', NULL, 'The', 'Admin', 1, 42, 1, 0, 'UserSpice', '2016-01-01 00:00:00', '2019-04-03 03:01:07', 1, 'nlPsJDtyeqFWsS', '2019-04-02 21:01:07', 0, '', '', '', '', '', '', '0000-00-00 00:00:00', '1899-11-30 00:00:00', '', 0, 1, '2017-10-08 15:24:37', 1, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
 (2, 'noreply@userspice.com', NULL, 'user', '$2y$12$HZa0/d7evKvuHO8I3U8Ff.pOjJqsGTZqlX8qURratzP./EvWetbkK', NULL, 'Sample', 'User', 1, 1, 1, 0, 'none', '2016-01-02 00:00:00', '2019-02-06 04:08:51', 1, '2ENJN4xD8nnjOgk', '2019-02-05 22:08:52', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
 (12, 'samsha1234567891@gmail.com', NULL, 'Samin', '$2y$12$XSPTC/K968MAew6tyYZape6uFno3uLMrjJ7qmUV/ZLeGLOna1s69m', NULL, 'Www', 'Www', 1, 3, 1, 0, '', '2019-02-05 19:17:18', '2019-02-06 04:20:09', 1, 'TOmbSG3SIYNXgG5', '2019-02-05 22:20:09', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
-(14, 'kazi.ahmedul.huque@gmail.com', NULL, 'naim', '$2y$12$Oz2SyR3bdhc8JK8qTNlTF.IgOrw5oZEuNmIx3MzA/xaTK0xPz.M7K', NULL, 'Naim', 'Ahmed', 1, 2, 1, 0, '', '2019-02-06 14:25:11', '2019-02-06 16:12:21', 1, '9ah9zz3Vm21PuLD', '2019-02-06 10:12:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student');
+(14, 'kazi.ahmedul.huque@gmail.com', NULL, 'naim', '$2y$12$Oz2SyR3bdhc8JK8qTNlTF.IgOrw5oZEuNmIx3MzA/xaTK0xPz.M7K', NULL, 'Naim', 'Ahmed', 1, 2, 1, 0, '', '2019-02-06 14:25:11', '2019-02-06 16:12:21', 1, '9ah9zz3Vm21PuLD', '2019-02-06 10:12:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
+(15, 'tanzil.ovi578@gmail.com', NULL, 'Tanzil', '$2y$12$UXbokrRt3IrpxZW0dGyKEuCC5lQJbd6L3D2HN7kkku9/X7d6l8aFW', NULL, 'Tanzil', 'Ovi', 1, 3, 1, 0, '', '2019-02-09 15:39:30', '2019-02-09 15:51:37', 1, 'ZaIPkkLMO4AsRF', '2019-02-09 09:51:37', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
+(16, 'saminsharar3@gmail.com', NULL, 'ssss', '$2y$12$gtEfmegZ7dlUyV.nuGl7BeYj.UfO0ovSfn4kRVjIS15aauC.IFKHu', NULL, 'Sss', 'Sss', 1, 0, 1, 0, '', '2019-04-03 02:59:16', '0000-00-00 00:00:00', 0, 'sLxiqwpCIpIsWEJ', '2019-04-03 20:59:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student');
 
 -- --------------------------------------------------------
 
@@ -1020,11 +1152,12 @@ CREATE TABLE `users_online` (
 --
 
 INSERT INTO `users_online` (`id`, `ip`, `timestamp`, `user_id`, `session`) VALUES
-(1, '::1', '1549448474', 1, ''),
+(1, '::1', '1554238949', 1, ''),
 (2, '::1', '1549405217', 12, ''),
 (3, '::1', '1549441365', 13, ''),
 (4, '::1', '1549404574', 2, ''),
-(5, '::1', '1549448324', 14, '');
+(5, '::1', '1549448324', 14, ''),
+(6, '::1', '1549705908', 15, '');
 
 -- --------------------------------------------------------
 
@@ -1062,7 +1195,9 @@ INSERT INTO `user_permission_matches` (`id`, `user_id`, `permission_id`) VALUES
 (111, 11, 1),
 (112, 12, 1),
 (113, 13, 1),
-(114, 14, 1);
+(114, 14, 1),
+(115, 15, 1),
+(116, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1269,7 @@ CREATE TABLE `us_forms` (
 INSERT INTO `us_forms` (`id`, `form`) VALUES
 (2, 'blog'),
 (3, 'news'),
-(5, 'course');
+(6, 'courseinfo');
 
 -- --------------------------------------------------------
 
@@ -1221,7 +1356,7 @@ CREATE TABLE `us_ip_list` (
 --
 
 INSERT INTO `us_ip_list` (`id`, `ip`, `user_id`, `timestamp`) VALUES
-(1, '::1', 1, '2019-02-06 10:19:53');
+(1, '::1', 1, '2019-02-11 14:01:41');
 
 -- --------------------------------------------------------
 
@@ -1325,15 +1460,33 @@ ALTER TABLE `blog_form`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `course`
+-- Indexes for table `class`
 --
-ALTER TABLE `course`
+ALTER TABLE `class`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `course_form`
+-- Indexes for table `courseinfo`
 --
-ALTER TABLE `course_form`
+ALTER TABLE `courseinfo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courseinfo_form`
+--
+ALTER TABLE `courseinfo_form`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `course_info`
+--
+ALTER TABLE `course_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1579,16 +1732,34 @@ ALTER TABLE `blog_form`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `course`
+-- AUTO_INCREMENT for table `class`
 --
-ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `course_form`
+-- AUTO_INCREMENT for table `courseinfo`
 --
-ALTER TABLE `course_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `courseinfo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `courseinfo_form`
+--
+ALTER TABLE `courseinfo_form`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `course_info`
+--
+ALTER TABLE `course_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `crons`
@@ -1624,7 +1795,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `logs_exempt`
@@ -1672,7 +1843,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1684,7 +1855,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `permission_page_matches`
 --
 ALTER TABLE `permission_page_matches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -1708,13 +1879,13 @@ ALTER TABLE `updates`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users_online`
 --
 ALTER TABLE `users_online`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users_session`
@@ -1726,7 +1897,7 @@ ALTER TABLE `users_session`
 -- AUTO_INCREMENT for table `user_permission_matches`
 --
 ALTER TABLE `user_permission_matches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `us_announcements`
@@ -1750,7 +1921,7 @@ ALTER TABLE `us_fingerprint_assets`
 -- AUTO_INCREMENT for table `us_forms`
 --
 ALTER TABLE `us_forms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `us_form_validation`

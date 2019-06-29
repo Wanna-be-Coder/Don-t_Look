@@ -21,6 +21,7 @@ if (typeof jQuery == 'undefined') {
 </script>
 
 <script src="<?=$us_url_root?>usersc/templates/<?=$settings->template?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?=$us_url_root?>usersc/templates/<?=$settings->template?>/assets/js/main.js" type="text/javascript"></script>
 <link href="<?=$us_url_root?>usersc/templates/<?=$settings->template?>/assets/css/hamburgers.min.css" rel="stylesheet">
 <?php
 //optional
