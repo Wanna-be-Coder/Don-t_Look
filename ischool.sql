@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2019 at 07:36 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Generation Time: Jul 24, 2019 at 11:41 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,7 +32,7 @@ CREATE TABLE `audit` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `page` varchar(255) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `ip` varchar(255) NOT NULL,
   `viewed` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -91,7 +91,9 @@ INSERT INTO `audit` (`id`, `user`, `page`, `timestamp`, `ip`, `viewed`) VALUES
 (47, 13, '96', '2019-02-05 22:22:56', '::1', 0),
 (48, 13, '96', '2019-02-05 22:23:14', '::1', 0),
 (49, 0, '4', '2019-02-05 23:01:56', '::1', 0),
-(50, 13, '4', '2019-02-05 23:02:02', '::1', 0);
+(50, 13, '4', '2019-02-05 23:02:02', '::1', 0),
+(51, 15, '106', '2019-07-24 07:52:28', '::1', 0),
+(52, 15, '106', '2019-07-24 07:52:50', '::1', 0);
 
 -- --------------------------------------------------------
 
@@ -102,8 +104,8 @@ INSERT INTO `audit` (`id`, `user`, `page`, `timestamp`, `ip`, `viewed`) VALUES
 CREATE TABLE `blog` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `content` text,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `content` text DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -156,6 +158,7 @@ INSERT INTO `blog_form` (`id`, `ord`, `col`, `form_descrip`, `table_descrip`, `c
 CREATE TABLE `class` (
   `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
   `tutor_id` int(11) NOT NULL,
   `days` varchar(100) NOT NULL,
   `seats` varchar(100) NOT NULL,
@@ -170,29 +173,11 @@ CREATE TABLE `class` (
 -- Dumping data for table `class`
 --
 
-INSERT INTO `class` (`id`, `course_id`, `tutor_id`, `days`, `seats`, `sdate`, `edate`, `stime`, `etime`, `uploads`) VALUES
-(1, 1, 1, 'sunday,monday,tuesday,wednesday,', '22', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(2, 1, 12, 'sunday,monday,friday,saturday,', '30', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(3, 1, 12, '', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(4, 1, 1, 'sunday,tuesday,', '12121', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(5, 1, 12, '', '213123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(6, 1, 1, 'tuesday,wednesday,', '123123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(7, 1, 12, 'wednesday,', '12', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(8, 1, 2, 'monday,thursday,', '1', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(12, 5, 1, 'sunday,', '1', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(14, 0, 0, 'c', 'd', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(15, 5, 1, 'thursday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(16, 5, 1, 'thursday,friday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(17, 5, 1, 'thursday,friday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(18, 5, 1, 'friday,', '12312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(19, 5, 1, 'saturday,', '2312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(20, 5, 1, 'saturday,', '2312', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(21, 5, 1, 'tuesday,thursday,', '1234', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(22, 5, 1, 'monday,wednesday,', '123', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(23, 5, 1, 'wednesday,', '11', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(24, 5, 1, 'wednesday,', '13', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(25, 5, 1, 'wednesday,', '13', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
-(26, 5, 1, 'sunday,tuesday,', '11', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', '');
+INSERT INTO `class` (`id`, `course_id`, `name`, `tutor_id`, `days`, `seats`, `sdate`, `edate`, `stime`, `etime`, `uploads`) VALUES
+(34, 5, 'A-1', 12, 'monday,tuesday,wednesday,', '12', '0000-00-00', '0000-00-00', '00:00:00', '00:00:00', ''),
+(35, 5, 'A-2', 12, 'sunday,monday,', '455', '0023-12-31', '0023-12-31', '00:00:00', '00:00:00', ''),
+(36, 10, 'G-1', 1, 'sunday,monday,', '30', '2007-12-31', '2008-01-03', '00:00:00', '00:00:00', ''),
+(37, 5, 'FG-12', 1, 'monday,tuesday,wednesday,', '45', '2020-12-31', '2021-12-31', '00:00:00', '00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -203,8 +188,8 @@ INSERT INTO `class` (`id`, `course_id`, `tutor_id`, `days`, `seats`, `sdate`, `e
 CREATE TABLE `courseinfo` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `content` text,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `content` text DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `type` varchar(255) DEFAULT NULL,
   `Complementaryknowledge` varchar(255) DEFAULT NULL,
   `sdate` date DEFAULT NULL
@@ -274,7 +259,10 @@ CREATE TABLE `courses` (
 INSERT INTO `courses` (`id`, `name`, `type`, `description`, `duration`, `document`) VALUES
 (5, 'ABC', 'Science &amp; Technology', 'Lorem IpsumLorem IpsumLorem Ip', '11', 'uploads/Cloth D.pptx'),
 (6, 'Test', 'Literature', 'sadasdasdasdasdasdasd', '4', 'uploads/Untitled-1.png'),
-(7, 'Test2', 'Literature', 'sadasdasdasdasdasdasd', '4', 'uploads/Untitled-1.png');
+(7, 'Test2', 'Literature', 'sadasdasdasdasdasdasd', '4', 'uploads/Untitled-1.png'),
+(9, 'It', 'Science &amp; Technology', 'Lorem Ipsum is simply dummy te', '4', 'uploads/Document.rtf'),
+(10, 'CSE', 'Science &amp; Technology', '1234', '5', 'uploads/5.PNG'),
+(11, 'Razer', 'Science &amp; Technology', 'It is a long established fact ', '6', 'uploads/Uninstall STAR WARS The Old Republic.log');
 
 -- --------------------------------------------------------
 
@@ -287,7 +275,7 @@ CREATE TABLE `course_info` (
   `name` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
   `complementary` varchar(100) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -298,13 +286,13 @@ CREATE TABLE `course_info` (
 
 CREATE TABLE `crons` (
   `id` int(11) NOT NULL,
-  `active` int(1) NOT NULL DEFAULT '1',
+  `active` int(1) NOT NULL DEFAULT 1,
   `sort` int(3) NOT NULL,
   `name` varchar(255) NOT NULL,
   `file` varchar(255) NOT NULL,
   `createdby` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -323,7 +311,7 @@ INSERT INTO `crons` (`id`, `active`, `sort`, `name`, `file`, `createdby`, `creat
 CREATE TABLE `crons_logs` (
   `id` int(11) NOT NULL,
   `cron_id` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -345,8 +333,8 @@ CREATE TABLE `email` (
   `transport` varchar(255) NOT NULL,
   `verify_url` varchar(255) NOT NULL,
   `email_act` int(1) NOT NULL,
-  `debug_level` int(1) NOT NULL DEFAULT '0',
-  `isSMTP` int(1) NOT NULL DEFAULT '0',
+  `debug_level` int(1) NOT NULL DEFAULT 0,
+  `isSMTP` int(1) NOT NULL DEFAULT 0,
   `isHTML` varchar(5) NOT NULL DEFAULT 'true',
   `useSMTPauth` varchar(6) NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -356,7 +344,29 @@ CREATE TABLE `email` (
 --
 
 INSERT INTO `email` (`id`, `website_name`, `smtp_server`, `smtp_port`, `email_login`, `email_pass`, `from_name`, `from_email`, `transport`, `verify_url`, `email_act`, `debug_level`, `isSMTP`, `isHTML`, `useSMTPauth`) VALUES
-(1, 'User Spice', 'smtp.gmail.com', 587, 'saminsharar2@gmail.com', 'Samsha123456!', 'i-School', 'saminsharar2@gmail.com', 'tls', 'http://localhost:8080/i-school(master)/', 1, 0, 1, 'true', 'true');
+(1, 'User Spice', 'smtp.gmail.com', 587, 'saminsharar2@gmail.com', 'Samsha123456!', 'i-School', 'saminsharar2@gmail.com', 'tls', 'http://localhost:8080/i-school(master)/', 0, 0, 1, 'true', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrollment`
+--
+
+CREATE TABLE `enrollment` (
+  `id` int(11) NOT NULL,
+  `classId` int(11) NOT NULL,
+  `studentId` int(11) NOT NULL,
+  `approved` tinyint(1) NOT NULL,
+  `reqTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `enrollment`
+--
+
+INSERT INTO `enrollment` (`id`, `classId`, `studentId`, `approved`, `reqTime`) VALUES
+(2, 36, 1, 0, '2019-07-24 09:18:08'),
+(3, 36, 15, 0, '2019-07-24 09:26:00');
 
 -- --------------------------------------------------------
 
@@ -435,7 +445,7 @@ CREATE TABLE `keys` (
 CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `user_id` int(3) NOT NULL,
-  `logdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `logdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `logtype` varchar(25) NOT NULL,
   `lognote` text NOT NULL,
   `ip` varchar(75) DEFAULT NULL
@@ -578,7 +588,42 @@ INSERT INTO `logs` (`id`, `user_id`, `logdate`, `logtype`, `lognote`, `ip`) VALU
 (130, 1, '2019-04-02 20:35:13', 'Pages Manager', 'Added 2 permission(s) to usersc/cclass2.php.', '::1'),
 (131, 1, '2019-04-02 20:35:14', 'Pages Manager', 'Retitled \'usersc/cclass2.php\' to \'Add Class\'.', '::1'),
 (132, 16, '2019-04-02 20:59:21', 'User', 'Registration completed and verification email sent.', '::1'),
-(133, 1, '2019-04-02 21:01:07', 'User', 'User logged in.', NULL);
+(133, 1, '2019-04-02 21:01:07', 'User', 'User logged in.', NULL),
+(134, 1, '2019-07-17 13:27:43', 'User', 'User logged in.', NULL),
+(135, 1, '2019-07-17 18:16:53', 'User', 'User logged in.', NULL),
+(136, 1, '2019-07-17 18:23:30', 'Pages Manager', 'Added 2 permission(s) to usersc/week.php.', '::1'),
+(137, 1, '2019-07-17 18:23:30', 'Pages Manager', 'Retitled \'usersc/week.php\' to \'Weekly Upload\'.', '::1'),
+(138, 1, '2019-07-18 18:35:26', 'User', 'User logged in.', NULL),
+(139, 17, '2019-07-18 18:48:46', 'User', 'Registration completed and verification email sent.', '::1'),
+(140, 1, '2019-07-18 18:48:57', 'User', 'User logged in.', NULL),
+(141, 1, '2019-07-18 18:49:57', 'Email Settings', 'Updated email_act from 1 to 0.', '::1'),
+(142, 17, '2019-07-18 18:50:17', 'User', 'User logged in.', NULL),
+(143, 18, '2019-07-18 18:51:20', 'User', 'Registration completed.', '::1'),
+(144, 18, '2019-07-18 18:51:27', 'User', 'User logged in.', NULL),
+(145, 1, '2019-07-18 18:53:47', 'User', 'User logged in.', NULL),
+(146, 1, '2019-07-23 17:25:00', 'User', 'User logged in.', NULL),
+(147, 1, '2019-07-23 18:52:15', 'Pages Manager', 'Added 6 permission(s) to usersc/courseinfo.php.', '::1'),
+(148, 1, '2019-07-23 18:52:15', 'Pages Manager', 'Retitled \'usersc/courseinfo.php\' to \'Course Info\'.', '::1'),
+(150, 1, '2019-07-24 05:00:43', 'User', 'User logged in.', NULL),
+(151, 1, '2019-07-24 05:49:22', 'Pages Manager', 'Added 3 permission(s) to usersc/teacherview.php.', '::1'),
+(152, 1, '2019-07-24 05:49:32', 'Pages Manager', 'Retitled \'usersc/teacherview.php\' to \'teacherview\'.', '::1'),
+(153, 1, '2019-07-24 06:19:02', 'Pages Manager', 'Added 6 permission(s) to usersc/class.php.', '::1'),
+(154, 1, '2019-07-24 06:19:13', 'Pages Manager', 'Retitled \'usersc/class.php\' to \'classList\'.', '::1'),
+(155, 1, '2019-07-24 06:30:53', 'User', 'User logged in.', NULL),
+(156, 15, '2019-07-24 07:46:22', 'User', 'User logged in.', NULL),
+(157, 1, '2019-07-24 07:47:29', 'User', 'User logged in.', NULL),
+(158, 1, '2019-07-24 07:47:54', 'Pages Manager', 'Added 5 permission(s) to usersc/penroll.php.', '::1'),
+(159, 1, '2019-07-24 07:47:54', 'Pages Manager', 'Retitled \'usersc/penroll.php\' to \'Enroll\'.', '::1'),
+(160, 15, '2019-07-24 07:48:13', 'User', 'User logged in.', NULL),
+(161, 1, '2019-07-24 07:53:04', 'User', 'User logged in.', NULL),
+(162, 1, '2019-07-24 08:01:26', 'Pages Manager', 'Added 3 permission(s) to usersc/sstream.php.', '::1'),
+(163, 1, '2019-07-24 08:01:26', 'Pages Manager', 'Retitled \'usersc/sstream.php\' to \'stream\'.', '::1'),
+(164, 1, '2019-07-24 08:44:40', 'Pages Manager', 'Added 3 permission(s) to usersc/successstream.php.', '::1'),
+(165, 1, '2019-07-24 08:44:40', 'Pages Manager', 'Retitled \'usersc/successstream.php\' to \'Stream On\'.', '::1'),
+(166, 1, '2019-07-24 09:03:15', 'Pages Manager', 'Added 5 permission(s) to usersc/viewclasslink.php.', '::1'),
+(167, 1, '2019-07-24 09:03:15', 'Pages Manager', 'Retitled \'usersc/viewclasslink.php\' to \'streamlinkforstudent\'.', '::1'),
+(168, 15, '2019-07-24 09:25:44', 'User', 'User logged in.', NULL),
+(169, 1, '2019-07-24 09:28:09', 'User', 'User logged in.', NULL);
 
 -- --------------------------------------------------------
 
@@ -590,7 +635,7 @@ CREATE TABLE `logs_exempt` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `createdby` int(11) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -678,10 +723,10 @@ CREATE TABLE `message_threads` (
   `msg_subject` varchar(255) NOT NULL,
   `last_update` datetime NOT NULL,
   `last_update_by` int(11) NOT NULL,
-  `archive_from` int(1) NOT NULL DEFAULT '0',
-  `archive_to` int(1) NOT NULL DEFAULT '0',
-  `hidden_from` int(1) NOT NULL DEFAULT '0',
-  `hidden_to` int(1) NOT NULL DEFAULT '0'
+  `archive_from` int(1) NOT NULL DEFAULT 0,
+  `archive_to` int(1) NOT NULL DEFAULT 0,
+  `hidden_from` int(1) NOT NULL DEFAULT 0,
+  `hidden_to` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -701,9 +746,9 @@ INSERT INTO `message_threads` (`id`, `msg_to`, `msg_from`, `msg_subject`, `last_
 CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `content` text,
+  `content` text DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -750,10 +795,10 @@ CREATE TABLE `notifications` (
   `user_id` int(11) NOT NULL,
   `message` mediumtext NOT NULL,
   `is_read` tinyint(4) NOT NULL,
-  `is_archived` tinyint(1) DEFAULT '0',
+  `is_archived` tinyint(1) DEFAULT 0,
   `date_created` datetime DEFAULT NULL,
   `date_read` datetime DEFAULT NULL,
-  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -766,8 +811,8 @@ CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
   `page` varchar(100) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `private` int(11) NOT NULL DEFAULT '0',
-  `re_auth` int(1) NOT NULL DEFAULT '0'
+  `private` int(11) NOT NULL DEFAULT 0,
+  `re_auth` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -817,7 +862,14 @@ INSERT INTO `pages` (`id`, `page`, `title`, `private`, `re_auth`) VALUES
 (99, 'usersc/add_course.php', 'Add Course', 1, 0),
 (101, 'usersc/cclass.php', 'Add Class', 1, 0),
 (102, 'usersc/add_coursep.php', 'process_course', 1, 0),
-(103, 'usersc/cclass2.php', 'Add Class', 1, 0);
+(103, 'usersc/cclass2.php', 'Add Class', 1, 0),
+(105, 'usersc/courseinfo.php', 'Course Info', 1, 0),
+(106, 'usersc/teacherview.php', 'teacherview', 1, 0),
+(107, 'usersc/class.php', 'classList', 1, 0),
+(109, 'usersc/penroll.php', 'Enroll', 1, 0),
+(110, 'usersc/sstream.php', 'stream', 1, 0),
+(111, 'usersc/successstream.php', 'Stream On', 1, 0),
+(112, 'usersc/viewclasslink.php', 'streamlinkforstudent', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -926,7 +978,40 @@ INSERT INTO `permission_page_matches` (`id`, `permission_id`, `page_id`) VALUES
 (72, 2, 102),
 (73, 6, 102),
 (74, 2, 103),
-(75, 6, 103);
+(75, 6, 103),
+(76, 2, 104),
+(77, 6, 104),
+(78, 1, 105),
+(79, 2, 105),
+(80, 3, 105),
+(81, 5, 105),
+(82, 6, 105),
+(83, 7, 105),
+(84, 2, 106),
+(85, 5, 106),
+(86, 6, 106),
+(87, 1, 107),
+(88, 2, 107),
+(89, 3, 107),
+(90, 5, 107),
+(91, 6, 107),
+(92, 7, 107),
+(93, 1, 109),
+(94, 2, 109),
+(95, 3, 109),
+(96, 5, 109),
+(97, 6, 109),
+(98, 2, 110),
+(99, 5, 110),
+(100, 6, 110),
+(101, 2, 111),
+(102, 5, 111),
+(103, 6, 111),
+(104, 1, 112),
+(105, 2, 112),
+(106, 3, 112),
+(107, 5, 112),
+(108, 6, 112);
 
 -- --------------------------------------------------------
 
@@ -956,7 +1041,7 @@ INSERT INTO `profiles` (`id`, `user_id`, `bio`) VALUES
 
 CREATE TABLE `settings` (
   `id` int(50) NOT NULL,
-  `recaptcha` int(1) NOT NULL DEFAULT '0',
+  `recaptcha` int(1) NOT NULL DEFAULT 0,
   `force_ssl` int(1) NOT NULL,
   `css_sample` int(1) NOT NULL,
   `us_css1` varchar(255) NOT NULL,
@@ -967,7 +1052,7 @@ CREATE TABLE `settings` (
   `track_guest` int(1) NOT NULL,
   `site_offline` int(1) NOT NULL,
   `force_pr` int(1) NOT NULL,
-  `glogin` int(1) NOT NULL DEFAULT '0',
+  `glogin` int(1) NOT NULL DEFAULT 0,
   `fblogin` int(1) NOT NULL,
   `gid` varchar(255) NOT NULL,
   `gsecret` varchar(255) NOT NULL,
@@ -1007,7 +1092,7 @@ CREATE TABLE `settings` (
   `copyright` varchar(255) NOT NULL,
   `custom_settings` int(1) NOT NULL,
   `system_announcement` varchar(255) NOT NULL,
-  `twofa` int(1) DEFAULT '0',
+  `twofa` int(1) DEFAULT 0,
   `force_notif` tinyint(1) DEFAULT NULL,
   `cron_ip` varchar(255) DEFAULT NULL,
   `registration` tinyint(1) DEFAULT NULL,
@@ -1018,8 +1103,8 @@ CREATE TABLE `settings` (
   `session_manager` tinyint(1) NOT NULL,
   `template` varchar(255) DEFAULT 'default',
   `saas` tinyint(1) DEFAULT NULL,
-  `redirect_uri_after_login` text,
-  `show_tos` tinyint(1) DEFAULT '1'
+  `redirect_uri_after_login` text DEFAULT NULL,
+  `show_tos` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1032,13 +1117,33 @@ INSERT INTO `settings` (`id`, `recaptcha`, `force_ssl`, `css_sample`, `us_css1`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stream_track`
+--
+
+CREATE TABLE `stream_track` (
+  `id` int(11) NOT NULL,
+  `streamlink` varchar(50) NOT NULL,
+  `tutor_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stream_track`
+--
+
+INSERT INTO `stream_track` (`id`, `streamlink`, `tutor_id`, `class_id`) VALUES
+(3, 'https://demo.bigbluebutton.org/gl/sam-3dp-6uz', 1, 36);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `updates`
 --
 
 CREATE TABLE `updates` (
   `id` int(11) NOT NULL,
   `migration` varchar(15) NOT NULL,
-  `applied_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `applied_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `update_skipped` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1086,14 +1191,14 @@ CREATE TABLE `users` (
   `lname` varchar(255) NOT NULL,
   `permissions` int(11) NOT NULL,
   `logins` int(100) NOT NULL,
-  `account_owner` tinyint(4) NOT NULL DEFAULT '0',
-  `account_id` int(11) NOT NULL DEFAULT '0',
+  `account_owner` tinyint(4) NOT NULL DEFAULT 0,
+  `account_id` int(11) NOT NULL DEFAULT 0,
   `company` varchar(255) NOT NULL,
   `join_date` datetime NOT NULL,
   `last_login` datetime NOT NULL,
-  `email_verified` tinyint(4) NOT NULL DEFAULT '0',
+  `email_verified` tinyint(4) NOT NULL DEFAULT 0,
   `vericode` varchar(15) NOT NULL,
-  `vericode_expiry` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `vericode_expiry` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `active` int(1) NOT NULL,
   `oauth_provider` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `oauth_uid` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -1105,18 +1210,18 @@ CREATE TABLE `users` (
   `modified` datetime NOT NULL,
   `fb_uid` varchar(255) NOT NULL,
   `un_changed` int(1) NOT NULL,
-  `msg_exempt` int(1) NOT NULL DEFAULT '0',
+  `msg_exempt` int(1) NOT NULL DEFAULT 0,
   `last_confirm` datetime DEFAULT NULL,
-  `protected` int(1) NOT NULL DEFAULT '0',
-  `dev_user` int(1) NOT NULL DEFAULT '0',
-  `msg_notification` int(1) NOT NULL DEFAULT '1',
-  `force_pr` int(1) NOT NULL DEFAULT '0',
+  `protected` int(1) NOT NULL DEFAULT 0,
+  `dev_user` int(1) NOT NULL DEFAULT 0,
+  `msg_notification` int(1) NOT NULL DEFAULT 1,
+  `force_pr` int(1) NOT NULL DEFAULT 0,
   `twoKey` varchar(16) DEFAULT NULL,
-  `twoEnabled` int(1) DEFAULT '0',
+  `twoEnabled` int(1) DEFAULT 0,
   `twoDate` datetime DEFAULT NULL,
-  `cloak_allowed` tinyint(1) NOT NULL DEFAULT '0',
+  `cloak_allowed` tinyint(1) NOT NULL DEFAULT 0,
   `org` int(11) DEFAULT NULL,
-  `account_mgr` int(11) DEFAULT '0',
+  `account_mgr` int(11) DEFAULT 0,
   `oauth_tos_accepted` tinyint(1) DEFAULT NULL,
   `user_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1126,12 +1231,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `email_new`, `username`, `password`, `pin`, `fname`, `lname`, `permissions`, `logins`, `account_owner`, `account_id`, `company`, `join_date`, `last_login`, `email_verified`, `vericode`, `vericode_expiry`, `active`, `oauth_provider`, `oauth_uid`, `gender`, `locale`, `gpluslink`, `picture`, `created`, `modified`, `fb_uid`, `un_changed`, `msg_exempt`, `last_confirm`, `protected`, `dev_user`, `msg_notification`, `force_pr`, `twoKey`, `twoEnabled`, `twoDate`, `cloak_allowed`, `org`, `account_mgr`, `oauth_tos_accepted`, `user_type`) VALUES
-(1, 'userspicephp@gmail.com', NULL, 'admin', '$2y$12$1v06jm2KMOXuuo3qP7erTuTIJFOnzhpds1Moa8BadnUUeX0RV3ex.', NULL, 'The', 'Admin', 1, 42, 1, 0, 'UserSpice', '2016-01-01 00:00:00', '2019-04-03 03:01:07', 1, 'nlPsJDtyeqFWsS', '2019-04-02 21:01:07', 0, '', '', '', '', '', '', '0000-00-00 00:00:00', '1899-11-30 00:00:00', '', 0, 1, '2017-10-08 15:24:37', 1, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
+(1, 'userspicephp@gmail.com', NULL, 'admin', '$2y$12$1v06jm2KMOXuuo3qP7erTuTIJFOnzhpds1Moa8BadnUUeX0RV3ex.', NULL, 'The', 'Admin', 1, 54, 1, 0, 'UserSpice', '2016-01-01 00:00:00', '2019-07-24 15:28:09', 1, 'nlPsJDtyeqFWsS', '2019-07-24 09:28:09', 0, '', '', '', '', '', '', '0000-00-00 00:00:00', '1899-11-30 00:00:00', '', 0, 1, '2017-10-08 15:24:37', 1, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
 (2, 'noreply@userspice.com', NULL, 'user', '$2y$12$HZa0/d7evKvuHO8I3U8Ff.pOjJqsGTZqlX8qURratzP./EvWetbkK', NULL, 'Sample', 'User', 1, 1, 1, 0, 'none', '2016-01-02 00:00:00', '2019-02-06 04:08:51', 1, '2ENJN4xD8nnjOgk', '2019-02-05 22:08:52', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
 (12, 'samsha1234567891@gmail.com', NULL, 'Samin', '$2y$12$XSPTC/K968MAew6tyYZape6uFno3uLMrjJ7qmUV/ZLeGLOna1s69m', NULL, 'Www', 'Www', 1, 3, 1, 0, '', '2019-02-05 19:17:18', '2019-02-06 04:20:09', 1, 'TOmbSG3SIYNXgG5', '2019-02-05 22:20:09', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, ''),
 (14, 'kazi.ahmedul.huque@gmail.com', NULL, 'naim', '$2y$12$Oz2SyR3bdhc8JK8qTNlTF.IgOrw5oZEuNmIx3MzA/xaTK0xPz.M7K', NULL, 'Naim', 'Ahmed', 1, 2, 1, 0, '', '2019-02-06 14:25:11', '2019-02-06 16:12:21', 1, '9ah9zz3Vm21PuLD', '2019-02-06 10:12:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
-(15, 'tanzil.ovi578@gmail.com', NULL, 'Tanzil', '$2y$12$UXbokrRt3IrpxZW0dGyKEuCC5lQJbd6L3D2HN7kkku9/X7d6l8aFW', NULL, 'Tanzil', 'Ovi', 1, 3, 1, 0, '', '2019-02-09 15:39:30', '2019-02-09 15:51:37', 1, 'ZaIPkkLMO4AsRF', '2019-02-09 09:51:37', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
-(16, 'saminsharar3@gmail.com', NULL, 'ssss', '$2y$12$gtEfmegZ7dlUyV.nuGl7BeYj.UfO0ovSfn4kRVjIS15aauC.IFKHu', NULL, 'Sss', 'Sss', 1, 0, 1, 0, '', '2019-04-03 02:59:16', '0000-00-00 00:00:00', 0, 'sLxiqwpCIpIsWEJ', '2019-04-03 20:59:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student');
+(15, 'tanzil.ovi578@gmail.com', NULL, 'Tanzil', '$2y$12$UXbokrRt3IrpxZW0dGyKEuCC5lQJbd6L3D2HN7kkku9/X7d6l8aFW', NULL, 'Tanzil', 'Ovi', 1, 6, 1, 0, '', '2019-02-09 15:39:30', '2019-07-24 15:25:44', 1, 'ZaIPkkLMO4AsRF', '2019-07-24 09:25:44', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
+(16, 'saminsharar3@gmail.com', NULL, 'ssss', '$2y$12$gtEfmegZ7dlUyV.nuGl7BeYj.UfO0ovSfn4kRVjIS15aauC.IFKHu', NULL, 'Sss', 'Sss', 1, 0, 1, 0, '', '2019-04-03 02:59:16', '0000-00-00 00:00:00', 0, 'sLxiqwpCIpIsWEJ', '2019-04-03 20:59:21', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
+(17, 'student@student.com', NULL, 'Student', '$2y$12$uRMYflNNC/6Ub0bi1ZxkXukEErMNyXVqw68nd3n1ZXBVOvbt1VZNS', NULL, 'Student', 'Student', 1, 1, 1, 0, '', '2019-07-19 00:48:41', '2019-07-19 00:50:17', 0, 'edS7RItRWoI1rfq', '2019-07-18 18:50:17', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student'),
+(18, 'Student123@asd.com', NULL, 'Student123', '$2y$12$zaZRazISmlCWOmvI5k6JjeMqzgYyvXQ2t2t1A6DC00HrQSVHHwaoq', NULL, 'Student@student.com', 'Student@student.com', 1, 1, 1, 0, '', '2019-07-19 00:51:20', '2019-07-19 00:51:27', 1, 'rS5CpqKfgVKfMdG', '2019-07-18 18:51:27', 1, '', '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 0, 0, NULL, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 1, 'Student');
 
 -- --------------------------------------------------------
 
@@ -1152,12 +1259,14 @@ CREATE TABLE `users_online` (
 --
 
 INSERT INTO `users_online` (`id`, `ip`, `timestamp`, `user_id`, `session`) VALUES
-(1, '::1', '1554238949', 1, ''),
+(1, '::1', '1563960498', 1, ''),
 (2, '::1', '1549405217', 12, ''),
 (3, '::1', '1549441365', 13, ''),
 (4, '::1', '1549404574', 2, ''),
 (5, '::1', '1549448324', 14, ''),
-(6, '::1', '1549705908', 15, '');
+(6, '::1', '1563960581', 15, ''),
+(7, '::1', '1563475822', 17, ''),
+(8, '::1', '1563475895', 18, '');
 
 -- --------------------------------------------------------
 
@@ -1169,7 +1278,7 @@ CREATE TABLE `users_session` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `hash` varchar(255) NOT NULL,
-  `uagent` text
+  `uagent` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1197,7 +1306,9 @@ INSERT INTO `user_permission_matches` (`id`, `user_id`, `permission_id`) VALUES
 (113, 13, 1),
 (114, 14, 1),
 (115, 15, 1),
-(116, 16, 1);
+(116, 16, 1),
+(117, 17, 1),
+(118, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -1221,7 +1332,8 @@ CREATE TABLE `us_announcements` (
 
 INSERT INTO `us_announcements` (`id`, `dismissed`, `link`, `title`, `message`, `ignore`, `class`) VALUES
 (1, 3, 'https://www.userspice.com/updates', 'New Version', 'December 11, 2018 - Thank you for trying UserSpice Beta!', '4.5.0', 'warning'),
-(2, 6, '#', 'New Version', 'December 15, 2019 - Beta 3 released.', '4.4.2', 'success');
+(2, 6, '#', 'New Version', 'December 15, 2019 - Beta 3 released.', '4.4.2', 'success'),
+(3, 15, '#', 'New Version!', 'April 28, 2019 - UserSpice 4.4.11 Released. SECURITY RELEASE - Fixes jQuery vulnerability.', '4.4.11', 'danger');
 
 -- --------------------------------------------------------
 
@@ -1234,7 +1346,7 @@ CREATE TABLE `us_fingerprints` (
   `fkUserID` int(11) NOT NULL,
   `Fingerprint` varchar(32) NOT NULL,
   `Fingerprint_Expiry` datetime NOT NULL,
-  `Fingerprint_Added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `Fingerprint_Added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1325,8 +1437,8 @@ CREATE TABLE `us_form_views` (
 CREATE TABLE `us_ip_blacklist` (
   `id` int(11) NOT NULL,
   `ip` varchar(50) NOT NULL,
-  `last_user` int(11) NOT NULL DEFAULT '0',
-  `reason` int(11) NOT NULL DEFAULT '0'
+  `last_user` int(11) NOT NULL DEFAULT 0,
+  `reason` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1348,7 +1460,7 @@ CREATE TABLE `us_ip_list` (
   `id` int(11) NOT NULL,
   `ip` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1356,7 +1468,7 @@ CREATE TABLE `us_ip_list` (
 --
 
 INSERT INTO `us_ip_list` (`id`, `ip`, `user_id`, `timestamp`) VALUES
-(1, '::1', 1, '2019-02-11 14:01:41');
+(1, '::1', 1, '2019-07-24 09:28:09');
 
 -- --------------------------------------------------------
 
@@ -1387,7 +1499,7 @@ CREATE TABLE `us_plugins` (
   `id` int(11) NOT NULL,
   `plugin` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `updates` text
+  `updates` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1414,7 +1526,7 @@ CREATE TABLE `us_saas_orgs` (
   `org` varchar(255) NOT NULL,
   `owner` int(11) NOT NULL,
   `level` int(11) NOT NULL,
-  `active` int(1) NOT NULL DEFAULT '1'
+  `active` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1433,7 +1545,7 @@ CREATE TABLE `us_user_sessions` (
   `UserSessionStarted` datetime NOT NULL,
   `UserSessionLastUsed` datetime DEFAULT NULL,
   `UserSessionLastPage` varchar(255) NOT NULL,
-  `UserSessionEnded` tinyint(1) NOT NULL DEFAULT '0',
+  `UserSessionEnded` tinyint(1) NOT NULL DEFAULT 0,
   `UserSessionEnded_Time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1505,6 +1617,12 @@ ALTER TABLE `crons_logs`
 -- Indexes for table `email`
 --
 ALTER TABLE `email`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enrollment`
+--
+ALTER TABLE `enrollment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1598,6 +1716,12 @@ ALTER TABLE `profiles`
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `stream_track`
+--
+ALTER TABLE `stream_track`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1717,7 +1841,7 @@ ALTER TABLE `us_user_sessions`
 -- AUTO_INCREMENT for table `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -1735,7 +1859,7 @@ ALTER TABLE `blog_form`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `courseinfo`
@@ -1753,7 +1877,7 @@ ALTER TABLE `courseinfo_form`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `course_info`
@@ -1780,6 +1904,12 @@ ALTER TABLE `email`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `enrollment`
+--
+ALTER TABLE `enrollment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `groups_menus`
 --
 ALTER TABLE `groups_menus`
@@ -1795,7 +1925,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `logs_exempt`
@@ -1843,7 +1973,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1855,7 +1985,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `permission_page_matches`
 --
 ALTER TABLE `permission_page_matches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -1870,6 +2000,12 @@ ALTER TABLE `settings`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `stream_track`
+--
+ALTER TABLE `stream_track`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `updates`
 --
 ALTER TABLE `updates`
@@ -1879,13 +2015,13 @@ ALTER TABLE `updates`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users_online`
 --
 ALTER TABLE `users_online`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users_session`
@@ -1897,13 +2033,13 @@ ALTER TABLE `users_session`
 -- AUTO_INCREMENT for table `user_permission_matches`
 --
 ALTER TABLE `user_permission_matches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `us_announcements`
 --
 ALTER TABLE `us_announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `us_fingerprints`

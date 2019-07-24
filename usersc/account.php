@@ -125,8 +125,15 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 		
 
 	?>
-		<div class="left2"><?= $record->name; ?></div><?php }?></div><br>
-		<div class="left1">My class<div class="left2">data</div></div><br>
+		<div class="left2"><a href='courseinfo.php?id=<?= $record->id ?>'><?= $record->name; ?></a></div><?php }?></div><br>
+		<div class="left1">
+		Class Available
+		<?php 
+	$db->query("SELECT * FROM `class`");
+	foreach ($db->results() as $record){
+		
+
+	?><div class="left2"><?= $record->name; ?></div><?php }?></div><br>
 		<div class="left1">My class<div class="left2">data</div></div><br>
     </div>
 	<div class="right">
@@ -162,6 +169,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 <a href="news.php" class="btn btn-info btn-block">Update News</a>
 <a href="cclass.php" class="btn btn-info btn-block">Make Class</a>
 <a href="add_course.php" class="btn btn-info btn-block">Add Courses</a>
+<a href="teacherview.php" class="btn btn-info btn-block">Your Class</a>
 	<?php	
 	}
 	?>
@@ -173,6 +181,7 @@ $userdetails = fetchUserDetails(NULL, NULL, $get_info_id); //Fetch user details
 
 <br>
 <button type="button" class="btn btn-primary">SYSTEM Admin</button><br><br>
+<a href="viewclasslink.php"><button type="button" class="btn btn-primary">Attend Class</button><br><br></a>
 <button type="button" class="btn btn-primary">Find Members</button>
 
 

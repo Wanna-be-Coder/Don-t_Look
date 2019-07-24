@@ -15,9 +15,13 @@ if (isset($_POST['submit'])) {
 	$courseid = Input::get('course');
 	$tutorid = Input::get('tutor');
 	$seat = Input::get('seat');
+	$section_name = Input::get('section_name');
+	$sdate = Input::get('sdate');
+	$edate = Input::get('edate');
 
 	$days = Input::get('day');
 	$day1s = Input::get('day1s');
+	$daysize = count($days);
 
 	if ($days == '') {
 		echo "<script type='text/javascript'>alert('Must Select atleeast one day');</script>";
@@ -33,9 +37,9 @@ if (isset($_POST['submit'])) {
 
 	$db = DB::getInstance();
 
-	$db->query("INSERT INTO `class`(`course_id`, `tutor_id`, `days`, `seats`) VALUES ('$courseid','$tutorid','$d','$seat')");
-	$id = $db->lastId();
-	header("location:cclass2.php?"+$id);
+	$db->query("INSERT INTO `class`(`course_id`,`name`, `tutor_id`, `days`, `seats`,`sdate`,`edate` ) VALUES ('$courseid','$section_name','$tutorid','$d','$seat','$sdate','$edate')");
+	// $id = $db->lastId();
+	header("location:cclass2.php?".$daysize);
 	}
 }
 ?>
@@ -45,6 +49,9 @@ if (isset($_POST['submit'])) {
         <div class="row">
             <div class="col-sm-12">
                 <form action="cclass.php" method="post">
+					<label for="complementary">Section name</label>
+					<input class="form-control form-control-lg" type="text"  name="section_name" required>
+					<br>
                     <label for="course">Select Course</label>
                     <select class="btn btn-lg btn-block" name="course">
                         <?php 
@@ -75,7 +82,16 @@ if (isset($_POST['submit'])) {
                         <?php 
 											} ?>
                     </select>
-                    <br>
+					<br>
+
+					<label for="complementary">Start Date</label>
+					<input class="form-control form-control-lg" type="date"  name="sdate" required>
+					<br>
+
+					<label for="complementary">End Date</label>
+					<input class="form-control form-control-lg" type="date"  name="edate" required>
+					<br>
+					
                     <label for="complementary">Select Days</label>
                     <div class="checkbox">
                         <label><input type="checkbox" id="day1" name="day[]" value="sunday" onClick="checkstatus()">Sunday</label>
@@ -132,90 +148,7 @@ if (isset($_POST['submit'])) {
                         End time: <input type="time" name="day7e">
                     </div> -->
 
-                    <script>
-											var x = document.getElementById("day1");
-											var y = document.getElementById("day2");
-											var a = document.getElementById("day3");
-											var b = document.getElementById("day4");
-											var c = document.getElementById("day5");
-											var d = document.getElementById("day6");
-											var e = document.getElementById("day7");
-
-
-											function checkstatus(){
-												if (x.checked == true) { 
-													document.getElementById("day1V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day1V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-
-
-
-
-												
-											}
-											
-										
-											function checkstatus1(){
-												if (y.checked == true) { 
-													document.getElementById("day2V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day2V").style.visibility="hidden";
-												}
-
-											}
-
-											function checkstatus2(){
-												if (a.checked == true) { 
-													document.getElementById("day3V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day3V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-											}
-											function checkstatus3(){
-												if (b.checked == true) { 
-													document.getElementById("day4V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day4V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-											}
-											function checkstatus4(){
-												if (c.checked == true) { 
-													document.getElementById("day5V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day5V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-											}
-											function checkstatus5(){
-												if (d.checked == true) { 
-													document.getElementById("day6V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day6V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-											}
-											function checkstatus6(){
-												if (e.checked == true) { 
-													document.getElementById("day7V").style.visibility="visible";
-                        }
-												else{
-													document.getElementById("day7V").style.visibility="hidden";
-												}
-												console.log(x.checked);
-											}
-                     
-											
-                    </script>
+           
 
                     <label for="complementary">Number of Seats</label>
                     <input class="form-control form-control-lg" type="number" min="0" name="seat" required>

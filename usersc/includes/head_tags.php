@@ -1,4 +1,7 @@
 <!-- Facebook sharing meta tags (delete if you don't want them) -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:url"                content="" /> <!-- URL for website (link address) -->
 <meta property="og:type"               content="website" /> <!-- type of site -->
 <meta property="og:title"              content="Userspice Site" /> <!-- title of site (title of share) -->
